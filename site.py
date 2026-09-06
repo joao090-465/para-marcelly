@@ -114,13 +114,14 @@ def pagina_inicial():
     <body>
         <div id="conteudoPrincipal">
             <h1>Perdão por tudo...</h1>
-            <button onclick="iniciarSurpresa()">Abrir de Coração</button>
+            <button onclick="iniciarSurpresa()">carta teste</button>
         </div>
         <div id="telaAnimacao">
             <canvas id="canvasCoracao"></canvas>
             <div id="caixaTexto">
                 <p class="mensagem">
-                    "Marce, eu sei que às vezes sou ignorante e chato, e te peço desculpas por isso do fundo do meu coração... Mas eu quero que você saiba o quanto eu te amo e o quanto você é importante para mim."
+                    "Marcelly, eu sei que às vezes sou ignorante e chato, e te peço desculpas por isso do fundo do meu coração... Mas eu quero que você saiba o quanto eu te amo e o quanto você é importante para mim, 
+                    msm a gnt brigando pra krl, sobre coisas inuteis e so queria dx claro que eu te amo tabomm bjoos."
                 </p>
                 <p class="assinatura">Eu Amo Você</p>
             </div>
