@@ -13,7 +13,6 @@ def pagina_inicial():
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Para Marcelly</title>
         <style>
-            /* Configuração geral do fundo escuro total */
             body {
                 background-color: #05020a;
                 color: #ffffff;
@@ -26,13 +25,10 @@ def pagina_inicial():
                 margin: 0;
                 overflow: hidden;
             }
-
-            /* Interface Inicial */
             #conteudoPrincipal {
                 text-align: center;
                 animation: fadeIn 1.5s ease-in-out;
             }
-
             h1 { 
                 color: #bc6ff1; 
                 font-size: 38px;
@@ -41,8 +37,6 @@ def pagina_inicial():
                 letter-spacing: 2px;
                 text-shadow: 0 0 15px rgba(188, 111, 241, 0.6);
             }
-            
-            /* Botão Roxo Neon Interativo */
             button {
                 background: transparent;
                 color: #bc6ff1;
@@ -62,8 +56,6 @@ def pagina_inicial():
                 box-shadow: 0 0 30px rgba(188, 111, 241, 0.8);
                 transform: scale(1.05);
             }
-
-            /* Tela da Animação do Coração */
             #telaAnimacao {
                 position: fixed;
                 top: 0;
@@ -80,8 +72,6 @@ def pagina_inicial():
                 top: 0;
                 left: 0;
             }
-
-            /* Caixa de Texto que vai aparecer no Final */
             #caixaTexto {
                 position: absolute;
                 top: 50%;
@@ -100,7 +90,6 @@ def pagina_inicial():
                 backdrop-filter: blur(5px);
                 border: 1px solid rgba(188, 111, 241, 0.2);
             }
-
             .mensagem {
                 font-size: 22px;
                 line-height: 1.6;
@@ -110,14 +99,12 @@ def pagina_inicial():
                 font-style: italic;
                 text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
             }
-
             .assinatura {
                 font-size: 28px;
                 font-weight: bold;
                 color: #ffffff;
                 text-shadow: 0 0 15px rgba(188, 111, 241, 0.6);
             }
-
             @keyframes fadeIn {
                 from { opacity: 0; transform: translateY(20px); }
                 to { opacity: 1; transform: translateY(0); }
@@ -125,18 +112,12 @@ def pagina_inicial():
         </style>
     </head>
     <body>
-
-        <!-- ETAPA 1: Interface Inicial -->
         <div id="conteudoPrincipal">
             <h1>Perdão por tudo...</h1>
             <button onclick="iniciarSurpresa()">Abrir de Coração</button>
         </div>
-
-        <!-- ETAPA 2: Área da Animação -->
         <div id="telaAnimacao">
             <canvas id="canvasCoracao"></canvas>
-            
-            <!-- Texto que surge após o coração se formar -->
             <div id="caixaTexto">
                 <p class="mensagem">
                     "Marce, eu sei que às vezes sou ignorante e chato, e te peço desculpas por isso do fundo do meu coração... Mas eu quero que você saiba o quanto eu te amo e o quanto você é importante para mim."
@@ -144,34 +125,26 @@ def pagina_inicial():
                 <p class="assinatura">Eu Amo Você</p>
             </div>
         </div>
-
         <script>
             function iniciarSurpresa() {
                 document.getElementById('conteudoPrincipal').style.display = 'none';
                 const tela = document.getElementById('telaAnimacao');
                 tela.style.display = 'block';
-
                 const canvas = document.getElementById('canvasCoracao');
                 const ctx = canvas.getContext('2d');
-
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
-
                 const cx = canvas.width / 2;
                 const cy = canvas.height / 2;
-                
                 const coresNeon = ["#9b5de5", "#ba55d3", "#da70d6", "#ee82ee", "#dda0dd"];
                 const textosOpcoes = ["Love you", "I love you", "LOVE YOU", "Marcelly"];
-                
                 let pontosValidos = [];
                 const tamanhoEscala = Math.min(canvas.width, canvas.height) / 55;
-
                 function dentroDoCoracao(x, y) {
                     const nx = (x - cx) / tamanhoEscala;
                     const ny = -(y - cy) / tamanhoEscala;
                     return Math.pow(nx*nx + ny*ny - 1, 3) - (nx*nx) * Math.pow(ny, 3) <= 0;
                 }
-
                 const raioBusca = tamanhoEscala * 20;
                 for (let y = cy - raioBusca; y < cy + raioBusca; y += 15) {
                     for (let x = cx - raioBusca; x < cx + raioBusca; x += 34) {
@@ -182,24 +155,18 @@ def pagina_inicial():
                         }
                     }
                 }
-
                 pontosValidos.sort((a, b) => a.y - b.y);
-
                 let indice = 0;
                 const passoPorFrame = 2; 
-
                 function animar() {
                     for (let i = 0; i < passoPorFrame; i++) {
                         if (indice < pontosValidos.length) {
                             const p = pontosValidos[indice];
-                            
                             ctx.fillStyle = coresNeon[Math.floor(Math.random() * coresNeon.length)];
                             const tamFonte = Math.floor(Math.random() * 3) + 9;
                             ctx.font = `bold ${tamFonte}px Arial`;
-                            
                             const txt = textosOpcoes[Math.floor(Math.random() * textosOpcoes.length)];
                             ctx.fillText(txt, p.x, p.y);
-                            
                             indice++;
                         } else {
                             const caixa = document.getElementById('caixaTexto');
@@ -212,7 +179,6 @@ def pagina_inicial():
                     }
                     requestAnimationFrame(animar);
                 }
-
                 animar();
             }
         </script>
@@ -221,7 +187,5 @@ def pagina_inicial():
     """
 
 if __name__ == "__main__":
-    # Pega a porta automática do servidor online ou usa a 5000 no seu computador
     porta = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=porta)
-        
